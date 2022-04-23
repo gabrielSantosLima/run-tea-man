@@ -1,64 +1,49 @@
 import { Coordinate } from "../Coordinate";
 import { Dimension } from "../Dimension";
+import { MobileElement } from "../Element";
 import { Fly } from "../flyweight/Fly";
+import { Speed } from "../Speed";
 import { Sprite } from "./Sprite";
 
-export class Player extends Sprite{
+export class Player extends Sprite implements MobileElement{
   currentFrame: number
-  gravity: number
-  yStart: number
-  ySpeed: number
-  yAceleration: number
   onFloor: boolean
+  startCoordinate: Coordinate
+  xSpeed: Speed
+  ySpeed: Speed
 
   constructor(coordinate: Coordinate, dimension: Dimension, fly: Fly){
-    super(coordinate, dimension, fly)
+    super(coordinate, dimension, fly, 1, 13, 13)
     this.currentFrame = 1
-    this.gravity = 1
-    this.yStart = coordinate.y
-    this.ySpeed = 1
-    this.yAceleration = 0
+    this.startCoordinate = { x: coordinate.x, y: coordinate.y }
+    this.xSpeed = { velocity: 0, aceleration: 0 }
+    this.ySpeed = { velocity: 1, aceleration: 1 }
     this.onFloor = true
   }
 
-  walk_right(){
+  walk_right(): void{
     this.coordinate.x += 1
+    this.nextFrame()
   }
-
-  walk_left(){
+  
+  walk_left(): void{
     this.coordinate.x += -1
+    this.nextFrame()
   }
 
-  draw(sketch: import("p5")): void {
-    if(this.currentFrame > 12){
-      this.currentFrame = 1
-    }else if(this.currentFrame < 1){
-      this.currentFrame = 12
-    }
+  jump(): void{
+    this.ySpeed.aceleration = 20
+    this.onFloor = false
+  }
 
-    if(this.yAceleration > 0){
-      this.yAceleration += -1
+  process(): void{
+    if(this.ySpeed.aceleration > 0){
+      this.ySpeed.aceleration += -1
+    }else if(!this.onFloor){
+      this.ySpeed.aceleration = 0
     }
-    
-    this.coordinate.y -= this.ySpeed * this.yAceleration 
-    
-    if(this.coordinate.y < this.yStart ){
-      this.coordinate.y += this.gravity
-    }
-    
-    this.onFloor = this.coordinate.y === this.yStart
-
-    sketch.image(
-      this.fly.getImage(), 
-      this.coordinate.x, 
-      this.coordinate.y, 
-      this.dimension.width,
-      this.dimension.height,
-      this.currentFrame * this.dimension.width,
-      0,
-      this.dimension.width,
-      this.dimension.height
-    )
+    this.coordinate.y -= this.ySpeed.velocity * this.ySpeed.aceleration 
+    this.onFloor = this.coordinate.y >= this.startCoordinate.y
   }
 
 }

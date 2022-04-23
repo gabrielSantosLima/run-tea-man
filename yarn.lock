@@ -162,6 +162,11 @@ nanoid@^3.3.1:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.2.tgz#c89622fafb4381cd221421c69ec58547a1eec557"
   integrity sha512-CuHBogktKwpm5g2sRgv83jEy2ijFzBwMoYA60orPDR7ynsLijJDqgsi4RDGj3OJpy3Ieb+LYwiRmIOGyytgITA==
 
+p5.collide2d@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/p5.collide2d/-/p5.collide2d-0.7.3.tgz#a22d8968a3149235f215e2f52f180342b67123d0"
+  integrity sha512-df25EMJqifEzXI2POsU+9jmTiXNiOijXYlo7VoEzA8nL1uS6lw9sM1dMBisI+F6owrxMoNOKLW53r2VpivD98w==
+
 p5@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/p5/-/p5-1.4.1.tgz#979739a576eb566225642b5d25cf7bb8945b70dd"

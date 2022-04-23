@@ -1,8 +1,8 @@
 import p5 from "p5";
 import { Dimension } from "../Dimension";
-import { ElementDrawable } from "../Element";
+import { DrawableElement } from "../Element";
 
-export abstract class Screen implements ElementDrawable{
+export abstract class Screen implements DrawableElement{
   dimension: Dimension
 
   constructor(dimension: Dimension){
