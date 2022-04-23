@@ -1,0 +1,15 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+main{
+  width: 100%;
+  display: flex;
+}
+
+main canvas{
+  margin: 10px auto;
+}
